@@ -2,10 +2,12 @@
 // @name         perplexity-clicker
 // @namespace    https://frosti.us/
 // @version      1.1
+// @author       Matt Frost
 // @description  Auto click perplexity pop-ups
 // @match        *://*.perplexity.ai/*
 // @grant        none
 // @run-at       document-idle
+// @source       https://github.com/frostius/perplexity-clicker
 // @updateURL    https://raw.githubusercontent.com/frostius/perplexity-clicker/refs/heads/main/auto-clicker.js
 // @downloadURL  https://raw.githubusercontent.com/frostius/perplexity-clicker/refs/heads/main/auto-clicker.js
 // ==/UserScript==
