@@ -25,21 +25,14 @@ This userscript automatically clicks away pop-ups and dialogs on [perplexity.ai]
    - Save and enable the script.
 
 
-## How It Works
-
-- The script defines a list of button selectors and associated text patterns to match pop-ups.
-- When a matching button is found, it is automatically clicked (or optionally the escape key is pressed)
-- A toast notification is shown when an action is taken.
-- The script listens for DOM changes to catch dynamically loaded pop-ups.
-
 ## Customization
 
 - To add or change which pop-ups are auto-clicked, edit the `BUTTONS` array in [`auto-clicker.js`](auto-clicker.js).
-- Logging and toast notifications can be toggled via the constants at the top of the script.
+- Toast notifications can be toggled via the `SHOW_TOAST` constant at the top of the script.
 
 ## Disclaimer
 
-This script is provided as-is. Use at your own risk.
+This script is provided as-is. Use at your own risk.  You are your own technical support.
 
 ---
 
