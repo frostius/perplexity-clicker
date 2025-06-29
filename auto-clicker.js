@@ -6,6 +6,8 @@
 // @match        *://*.perplexity.ai/*
 // @grant        none
 // @run-at       document-idle
+// @updateURL    https://raw.githubusercontent.com/frostius/perplexity-clicker/refs/heads/main/auto-clicker.js
+// @downloadURL  https://raw.githubusercontent.com/frostius/perplexity-clicker/refs/heads/main/auto-clicker.js
 // ==/UserScript==
 
 (function () {
