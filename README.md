@@ -11,8 +11,16 @@ This userscript automatically clicks away pop-ups and dialogs on [perplexity.ai]
 ## Installation
 
 1. Install a userscript manager like [Tampermonkey](https://www.tampermonkey.net/) or [Violentmonkey](https://violentmonkey.github.io/).
-2. Copy the contents of [`auto-clicker.js`](auto-clicker.js) into a new userscript.
-3. Save and enable the script.
+2. **Option A:**  
+   - Copy the contents of [`auto-clicker.js`](auto-clicker.js) into a new userscript.
+   - Save and enable the script.
+3. **Option B:**  
+   - Click the "Install" button in your userscript manager and enter the raw script URL:  
+     ```
+     https://raw.githubusercontent.com/frostius/perplexity-clicker/refs/heads/main/auto-clicker.js
+     ```
+   - Save and enable the script.
+
 
 ## How It Works
 
