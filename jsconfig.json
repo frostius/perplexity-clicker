@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "checkJs": true, //same as //ts-check at top of file
+    "module":"esnext",
+    "target":"esnext",
+    "strictFunctionTypes": true,
+    //"noUnusedLocals": true,
+    //"noUnusedParameters": true
+    // "strictNullChecks": true, //causes lots of errors comparing number? to values
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}
