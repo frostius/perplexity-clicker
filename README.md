@@ -12,7 +12,7 @@ This userscript automatically clicks away pop-ups and dialogs on [perplexity.ai]
 
 1. Install a userscript manager like [Tampermonkey](https://www.tampermonkey.net/) or [Violentmonkey](https://violentmonkey.github.io/).
 3. **Tampermonkey**  
-   - Install tampermonkey
+   - Install Tampermonkey
    - Open Tampermonkey dashboard
    - Navigate to `utilities` tab
    - Paste the `auto-clicker.js` raw URL into the `Import from URL` field and click the "install" button
