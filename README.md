@@ -33,7 +33,3 @@ This userscript automatically clicks away pop-ups and dialogs on [perplexity.ai]
 ## Disclaimer
 
 This script is provided as-is. Use at your own risk.  You are your own technical support.
-
----
-
-**Author:** [frosti.us](https://frosti.us/)
