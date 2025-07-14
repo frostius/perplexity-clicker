@@ -3,7 +3,7 @@
 // @namespace    https://frosti.us/
 // @version      1.1
 // @author       Matt Frost
-// @description  Auto click perplexity pop-ups
+// @description  Auto-close perplexity requests to login or subscribe
 // @match        *://*.perplexity.ai/*
 // @grant        none
 // @run-at       document-idle
@@ -18,7 +18,7 @@
   const LOG_CLICK  = false;
   const LOG_TEXT   = false;
   const SHOW_TOAST = true;
-  const NAME = 'auto-clicker';
+  const NAME = 'chillPlex';
 
   /** add buttons here to be matched
    * @type {Button[]} */
@@ -37,6 +37,8 @@
       ]},
     {name:'App', match:'div>button[type="button"]',
       texts:[{up:2,match:'div',text:'Download now'}]},
+    {name:'New button', match:'div>button[type="button"]',action:'escape',
+      texts:[{up:2,match:'h1',text:'Lose your answer?'}]},
     {name:'Open App', match:'div>button[type="button"]',action:'escape',
       texts:[
         {match:':scope>div>div',text:'Open Perplexity app'},
@@ -141,6 +143,12 @@
     if( !button ) return;
     if(LOG_CLICK) console.log(`auto-clicked button:${button?.name}`);
     if(SHOW_TOAST) showToast(`escaped ${button?.name}`);
+    const ESCAPE_EVENT = new KeyboardEvent('keydown', {
+      key: 'Escape',
+      keyCode: 27,
+      code: 'Escape',
+      which: 27,
+      bubbles: true });
     node.dispatchEvent(ESCAPE_EVENT);
   }
 
@@ -231,10 +239,3 @@
  * @property {ButtonText[] =} texts text matches relative to button
  */
 
-const ESCAPE_EVENT = new KeyboardEvent('keydown', {
-    key: 'Escape',
-    keyCode: 27,
-    code: 'Escape',
-    which: 27,
-    bubbles: true
-});
