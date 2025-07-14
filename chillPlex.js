@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         perplexity-clicker
 // @namespace    https://frosti.us/
-// @version      1.1
+// @version      1.2
 // @author       Matt Frost
 // @description  Auto-close perplexity requests to login or subscribe
 // @match        *://*.perplexity.ai/*
