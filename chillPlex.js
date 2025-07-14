@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         perplexity-clicker
-// @namespace    https://frosti.us/
+// @namespace    https://github.com/frostius/perplexity-clicker
 // @version      1.2
 // @author       Matt Frost
 // @description  Auto-close perplexity requests to login or subscribe
