@@ -35,6 +35,8 @@
         {up:1,match:':scope>div>div',text:'Make it yours'},
         {up:2,match:':scope>div>button>div>div',text:'Save Interests'},
       ]},
+    {name:'Comet', match:'div>button[type="button"]',
+      texts:[{up:2,match:':scope>div>div>button>div>div',text:'Download Comet'}]},
     {name:'App', match:'div>button[type="button"]',
       texts:[{up:2,match:'div',text:'Download now'}]},
     {name:'New button', match:'div>button[type="button"]',action:'escape',
@@ -222,20 +224,21 @@
   setInterval(()=>{ clickButtons(); }, 1500)
   if( LOG_LOAD  ) console.log(`${NAME} loaded`);
 
+  /** Button text match
+   * @typedef ButtonText
+   * @property {number =} up number of parents to ascend before matching
+   * @property {string } match CSS match to get text node (after `up`)
+   * @property {string} text exact `textContent` of matching node
+   */
+
+  /**
+   * @typedef Button
+   * @property {string} name button unique description
+   * @property {string} match CSS match to find button.  Does not have to be unique
+   * @property {'escape'|'click'} [action] action on matching button
+   * @property {ButtonText[] =} texts text matches relative to button
+   */
+
 })();
 
-/** Button text match
- * @typedef ButtonText
- * @property {number =} up number of parents to ascend before matching
- * @property {string } match CSS match to get text node (after `up`)
- * @property {string} text exact `textContent` of matching node
- */
-
-/**
- * @typedef Button
- * @property {string} name button unique description
- * @property {string} match CSS match to find button.  Does not have to be unique
- * @property {'escape'|'click'} [action] action on matching button
- * @property {ButtonText[] =} texts text matches relative to button
- */
 

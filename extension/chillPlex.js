@@ -20,6 +20,8 @@
         {up:1,match:':scope>div>div',text:'Make it yours'},
         {up:2,match:':scope>div>button>div>div',text:'Save Interests'},
       ]},
+    {name:'Comet', match:'div>button[type="button"]',
+      texts:[{up:2,match:':scope>div>div>button>div>div',text:'Download Comet'}]},
     {name:'App', match:'div>button[type="button"]',
       texts:[{up:2,match:'div',text:'Download now'}]},
     {name:'Open App', match:'div>button[type="button"]',action:'escape',
