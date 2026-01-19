@@ -23,7 +23,8 @@
   /** add buttons here to be matched
    * @type {Button[]} */
   const BUTTONS = [
-    {name:'Sign in', match:'div>button[type="button"]',
+    {name:'Sign in', match:'div>button[type="button"]', action:'delete',
+      delete:{up:3,match:'div'},
       texts:[{up:2,match:'div',text:'Sign in or create an account'}]},
     {name:'SSO', match:'div[data-testid="login-modal"] button[type="button"]',
       texts:[
@@ -41,6 +42,8 @@
       texts:[{up:2,match:'div',text:'Download now'}]},
     {name:'New button', match:'div>button[type="button"]',action:'escape',
       texts:[{up:2,match:'h1',text:'Lose your answer?'}]},
+    {name:'Comet overlay', match:'div>button[type="button"]',action:'escape',
+      texts:[{match:':scope>div>div',text:'Download Comet'}]},
     {name:'Open App', match:'div>button[type="button"]',action:'escape',
       texts:[
         {match:':scope>div>div',text:'Open Perplexity app'},
@@ -48,28 +51,28 @@
     // {name:'Google sign in', match:'div#close[role="button"]', text:{up:1,tagName:'div',text:'Sign in with Google'}},
   ];
 
-//--- text matching
+//--- pattern matching
 
-  /** if node matches button text test, return matching node
+  /** if node matches button text pattern, return matching node
    * @param {HTMLElement} node
    * @param {Button} button */
   function hasText(node,button) {
     if( !button.texts ) return;
     let match;
-    for(const text of button.texts) {
-      if( match = matchText(node,button,text) )
+    for(const ptn of button.texts) {
+      if( match = matchPattern(node,button,ptn) )
         return match;
     }
   }
 
-  /** if node matches button text test, return node that matched
-   * @param {HTMLElement} node
-   * @param {Button} button
-   * @param {ButtonText} bText */
-  function matchText(node,button,bText) {
+  /** if node matches pattern, return element that matched
+   * @param {HTMLElement} node root node
+   * @param {Button} button source button
+   * @param {Pattern} ptn match pattern */
+  function matchPattern(node,button,ptn) {
 
     //ascend 'up' levels
-    const up = Number.isFinite(bText?.up) ?Math.abs(bText?.up) :0;
+    const up = Number.isFinite(ptn?.up) ?Math.abs(ptn?.up) :0;
     let nText = node;
     for(let i=0;i<up && nText;i++)
       nText = nText?.parentElement;
@@ -77,15 +80,17 @@
 
     //limit match to children
     let match;
-    for(const e of nText.querySelectorAll(bText.match))
-      if( match = matchChildText(e,button,bText) )
+    for(const e of nText.querySelectorAll(ptn.match)) {
+      if( !ptn.text ) return e;
+      if( match = matchChildText(e,button,ptn) )
         return match;
+    }
   }
 
   /** if node matches button text test, return node that matched
    * @param {Element} node
    * @param {Button} button
-   * @param {ButtonText} bText */
+   * @param {Pattern} bText */
   function matchChildText(node,button,bText) {
     if( normalizeText(node?.textContent) == bText.text) {
       if( LOG_TEXT) console.log(`found ${button.name} text:${bText.text}`);
@@ -115,6 +120,8 @@
     if( findButton(node) !== btn ) return;
     if( btn.action==='escape' )
       sendEscape(node,btn);
+    else if( btn.action==='delete')
+      deleteButton(node,btn);
     else if(node?.click)
       clickButton(node,btn);
   }
@@ -152,6 +159,18 @@
       which: 27,
       bubbles: true });
     node.dispatchEvent(ESCAPE_EVENT);
+  }
+
+  /**
+   * Delete button and wrapper
+   * @param {HTMLElement} node
+   * @param {Button} button */
+  function deleteButton(node,button) {
+    if( !button ) return;
+    const match = matchPattern(node,button,button.delete);
+    if(LOG_CLICK) console.log(`deleted button:${button?.name}`);
+    if(SHOW_TOAST) showToast(`deleted ${button?.name}`);
+    match.remove();
   }
 
   /**
@@ -224,21 +243,20 @@
   setInterval(()=>{ clickButtons(); }, 1500)
   if( LOG_LOAD  ) console.log(`${NAME} loaded`);
 
-  /** Button text match
-   * @typedef ButtonText
-   * @property {number =} up number of parents to ascend before matching
-   * @property {string } match CSS match to get text node (after `up`)
-   * @property {string} text exact `textContent` of matching node
-   */
-
-  /**
-   * @typedef Button
-   * @property {string} name button unique description
-   * @property {string} match CSS match to find button.  Does not have to be unique
-   * @property {'escape'|'click'} [action] action on matching button
-   * @property {ButtonText[] =} texts text matches relative to button
-   */
-
 })();
 
+/** Button match
+ * @typedef Pattern
+ * @property {number} [up] number of parents to ascend before matching
+ * @property {string} [match] CSS match to get text node (after `up`)
+ * @property {string} [text] exact `textContent` of matching node
+ */
 
+/**
+ * @typedef Button
+ * @property {string} name button unique description
+ * @property {string} match CSS match to find button.  Does not have to be unique
+ * @property {'escape'|'click'|'delete'} [action] action on matching button
+ * @property {Pattern =} delete match for `delete` action
+ * @property {Pattern[] =} texts text matches relative to button
+ */
